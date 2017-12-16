@@ -12,6 +12,5 @@
     "purescript-strings": "^3.3.2"
   },
   "devDependencies": {
-    "purescript-psci-support": "^3.0.0"
   }
 }
