@@ -10,10 +10,12 @@ import Data.Array (range)
 import Data.Map (Map)
 import Data.Map as Map
 import Control.Monad.Eff (Eff)
-import Data.Debugged (print, print')
+import Data.Debugged (class Debug, print, print', debugged)
 
 main = do
-  let p = print'
+  let p :: forall a. Debug a => a -> _
+      p x = print' x
+
   p 24
   p 1.4e10
   p 1.4e+30
@@ -27,6 +29,7 @@ main = do
   p [[[[unit]]]]
   p [Tuple "a" 1, Tuple "b" 2]
   p eg
+  p (debugged eg)
   p {foo: 1, bar: "hi"}
   p {foo: 1, bar: "hi", baz: {quux: 3, aah: Tuple "AAH" "AAAAH"}}
   p (Map.fromFoldable [Tuple "a" 1, Tuple "b" 2])
