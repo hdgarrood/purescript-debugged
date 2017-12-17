@@ -1,5 +1,7 @@
 {
   "name": "purescript-debugged",
+  "license": "MIT",
+  "author": "Harry Garrood",
   "ignore": [
     "**/.*",
     "node_modules",

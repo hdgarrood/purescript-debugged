@@ -25,3 +25,10 @@ Previous discussion:
 
 - https://github.com/purescript/purescript/issues/1675
 - https://github.com/purescript/purescript/issues/2731
+
+## License
+
+This code is MIT licensed; the `Debug (Record a)` instance is adapted from
+@matthewleon's [purescript-record-show][] library.
+
+[purescript-record-show]: https://github.com/matthewleon/purescript-record-show
