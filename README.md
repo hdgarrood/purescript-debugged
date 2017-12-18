@@ -30,7 +30,7 @@ Previous discussion:
 
 To be done:
 
-- Decide whether to hide constructors
+- Decide whether to hide `Debugged` constructors
 - Pretty-print `Debugged` expression trees
 - Provide `uneval :: Debugged -> Maybe String`?
 - Diff `Debugged` expression trees
