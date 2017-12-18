@@ -10,7 +10,7 @@ import Data.Array (range)
 import Data.Map (Map)
 import Data.Map as Map
 import Control.Monad.Eff (Eff)
-import Data.Debugged (class Debug, print, print', debugged)
+import Data.Debugged (class Debug, print', debugged)
 
 main = do
   let p :: forall a. Debug a => a -> _
