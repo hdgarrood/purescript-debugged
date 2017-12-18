@@ -30,10 +30,10 @@ Previous discussion:
 
 To be done:
 
+- Diff `Debugged` expression trees
 - Decide whether to hide `Debugged` constructors
 - Pretty-print `Debugged` expression trees
 - Provide `uneval :: Debugged -> Maybe String`?
-- Diff `Debugged` expression trees
 
 ## License
 
