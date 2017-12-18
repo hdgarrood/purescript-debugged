@@ -26,6 +26,15 @@ Previous discussion:
 - https://github.com/purescript/purescript/issues/1675
 - https://github.com/purescript/purescript/issues/2731
 
+## Status
+
+To be done:
+
+- Decide whether to hide constructors
+- Pretty-print `Debugged` expression trees
+- Provide `uneval :: Debugged -> Maybe String`?
+- Diff `Debugged` expression trees
+
 ## License
 
 This code is MIT licensed; the `Debug (Record a)` instance is adapted from
