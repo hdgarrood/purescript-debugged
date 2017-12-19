@@ -38,6 +38,7 @@ main = do
   p (LL.fromFoldable (range 1 10))
   p (pure unit :: Eff _ Unit)
 
+-- note: the type signature is needed here for instance selection
 eg :: forall a. Tuple (a -> a) (Tuple (Either Void (Maybe Unit)) (Either (Either Int Int) Int))
 eg = Tuple id (Tuple (Right Nothing) (Left (Left 3)))
 
