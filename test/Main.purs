@@ -10,11 +10,12 @@ import Data.Array (range)
 import Data.Map (Map)
 import Data.Map as Map
 import Effect (Effect)
-import Data.Debugged (class Debug, print', debugged)
+import Data.Debugged (class Debug, debugged)
+import PSCI.Support (eval)
 
 main = do
   let p :: forall a. Debug a => a -> _
-      p x = print' x
+      p x = eval x
 
   p 24
   p 1.4e10
@@ -30,7 +31,7 @@ main = do
   p [[[[unit]]]]
   p [Tuple "a" 1, Tuple "b" 2]
   p eg
-  p (debugged eg)
+  -- p (debugged eg)
   p {foo: 1, bar: "hi"}
   p {foo: 1, bar: "hi", baz: {quux: 3, aah: Tuple "AAH" "AAAAH"}}
   p (Map.fromFoldable [Tuple "a" 1, Tuple "b" 2])
