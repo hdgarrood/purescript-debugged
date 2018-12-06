@@ -9,7 +9,7 @@ import Data.List.Lazy as LL
 import Data.Array (range)
 import Data.Map (Map)
 import Data.Map as Map
-import Control.Monad.Eff (Eff)
+import Effect (Effect)
 import Data.Debugged (class Debug, print', debugged)
 
 main = do
@@ -36,9 +36,9 @@ main = do
   p (Map.fromFoldable [Tuple "a" 1, Tuple "b" 2])
   p (L.fromFoldable (range 1 10))
   p (LL.fromFoldable (range 1 10))
-  p (pure unit :: Eff _ Unit)
+  p (pure unit :: Effect Unit)
 
 -- note: the type signature is needed here for instance selection
 eg :: forall a. Tuple (a -> a) (Tuple (Either Void (Maybe Unit)) (Either (Either Int Int) Int))
-eg = Tuple id (Tuple (Right Nothing) (Left (Left 3)))
+eg = Tuple identity (Tuple (Right Nothing) (Left (Left 3)))
 
