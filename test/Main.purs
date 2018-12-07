@@ -1,17 +1,32 @@
 module Test.Main where
 
 import Prelude
-import Data.Tuple (Tuple(..))
-import Data.Maybe (Maybe(..))
+
+import Data.Array (range)
+import Data.Debugged (class Debug, debugged, genericDebug)
 import Data.Either (Either(..))
+import Data.Generic.Rep (class Generic)
 import Data.List as L
 import Data.List.Lazy as LL
-import Data.Array (range)
 import Data.Map (Map)
 import Data.Map as Map
+import Data.Maybe (Maybe(..))
+import Data.Tuple (Tuple(..))
 import Effect (Effect)
-import Data.Debugged (class Debug, debugged)
 import PSCI.Support (eval)
+
+data Example a b
+  = None
+  | PairA a a
+  | PairB b b
+  | Loads (Array a) (Either a b)
+
+derive instance genericExample :: Generic (Example a b) _
+
+type Eg = Example Int String
+
+instance debugExample :: (Debug a, Debug b) => Debug (Example a b) where
+  debugged = genericDebug
 
 main = do
   let p :: forall a. Debug a => a -> _
@@ -39,6 +54,10 @@ main = do
   p (L.fromFoldable (range 1 10))
   p (LL.fromFoldable (range 1 10))
   p (pure unit :: Effect Unit)
+
+  p (None :: Eg)
+  p (PairA 3 3 :: Eg)
+  p (Loads [1,2,3] (Right "hi"))
 
 -- note: the type signature is needed here for instance selection
 eg :: forall a. Tuple (a -> a) (Tuple (Either Void (Maybe Unit)) (Either (Either Int Int) Int))
