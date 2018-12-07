@@ -111,11 +111,11 @@ Output:
 Tuple 1 (-1)
 Tuple 1.0 (-1.0)
 unit
-[unit]
-[ [ [[unit]] ] ]
-[ [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9] ]
+[ unit ]
+[ [ [ [ unit ] ] ] ]
+[ [ 1, 2, 3 ],
+  [ 4, 5, 6 ],
+  [ 7, 8, 9 ] ]
 [ Tuple "a" 1,
   Tuple "b" 2 ]
 Tuple
@@ -124,13 +124,13 @@ Tuple
     (Right Nothing)
     (Left (Left 3)))
 <Repr
- value:
+  value:
     Tuple
       <function>
       (Tuple
         (Right Nothing)
-        (Left (Left 3))) >
-{bar: "hi", foo: 1}
+        (Left (Left 3)))>
+{ bar: "hi", foo: 1 }
 { bar:
     "hi",
   baz:
@@ -140,7 +140,7 @@ Tuple
         3 },
   foo:
     1 }
-<Map {"a": 1, "b": 2}>
+<Map { "a": 1, "b": 2 }>
 <List
 [ 1,
   2,
@@ -167,7 +167,7 @@ Tuple
 None
 PairA 3 3
 Loads
-  [1, 2, 3]
+  [ 1, 2, 3 ]
   (Right "hi")
 ```
 
