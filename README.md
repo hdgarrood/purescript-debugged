@@ -176,8 +176,6 @@ Loads
 
 To be done:
 
-- Pretty-print `Debugged` expression trees
-- Decide whether to hide `Debugged` constructors
 - Diff `Debugged` expression trees
 - Provide `uneval :: Debugged -> Maybe String`?
 
