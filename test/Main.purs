@@ -29,9 +29,10 @@ main = do
   p unit
   p [unit]
   p [[[[unit]]]]
+  p [[1,2,3], [4,5,6], [7,8,9] ]
   p [Tuple "a" 1, Tuple "b" 2]
   p eg
-  -- p (debugged eg)
+  p (debugged eg)
   p {foo: 1, bar: "hi"}
   p {foo: 1, bar: "hi", baz: {quux: 3, aah: Tuple "AAH" "AAAAH"}}
   p (Map.fromFoldable [Tuple "a" 1, Tuple "b" 2])
