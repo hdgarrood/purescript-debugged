@@ -12,9 +12,9 @@ provide a few benefits:
 - Provides the ability to diff expected vs actual structures in tests without
   having to write custom diffing logic for each new data type.
 - No expectation that the user should be able to "uneval" the result to produce
-  the same value again, i.e. by giving the class a smaller and more
-  clearly-defined purpose, it should hopefully help us to write uncontroversial
-  instances for more types.
+  the same value again; by giving the class a smaller and more clearly-defined
+  purpose, it should hopefully help us to write uncontroversial instances for
+  more types.
 
 The intention (if this experiment turns out to be successful) is that every
 data type of kind `Type` should have a `Debug` instance, so that you never get
