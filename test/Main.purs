@@ -3,7 +3,7 @@ module Test.Main where
 import Prelude
 
 import Data.Array (range)
-import Data.Debugged (class Debug, debugged, genericDebug)
+import Data.Debugged (class Debug, debugged, genericDebug, diff, prettyPrintDelta)
 import Data.Either (Either(..))
 import Data.Generic.Rep (class Generic)
 import Data.List as L
@@ -13,6 +13,7 @@ import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Effect (Effect)
+import Effect.Console (log)
 import PSCI.Support (eval)
 
 data Example a b
@@ -23,7 +24,7 @@ data Example a b
 
 derive instance genericExample :: Generic (Example a b) _
 
-type Eg = Example Int String
+type Eg = Example Int (Array String)
 
 instance debugExample :: (Debug a, Debug b) => Debug (Example a b) where
   debugged = genericDebug
@@ -57,7 +58,15 @@ main = do
 
   p (None :: Eg)
   p (PairA 3 3 :: Eg)
-  p (Loads [1,2,3] (Right "hi"))
+  p (Loads [1,2,3] (Right ["hi"]))
+
+  let
+    x = Loads [1,2,3,4,5] (Right ["hi"]) :: Eg
+    y = Loads [1,2,4,3,5] (Right []) :: Eg
+    z = None :: Eg
+
+  log (prettyPrintDelta (diff (debugged x) (debugged y)))
+  log (prettyPrintDelta (diff (debugged x) (debugged z)))
 
 -- note: the type signature is needed here for instance selection
 eg :: forall a. Tuple (a -> a) (Tuple (Either Void (Maybe Unit)) (Either (Either Int Int) Int))
