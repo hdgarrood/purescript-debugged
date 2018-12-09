@@ -3,18 +3,26 @@ module Test.Main where
 import Prelude
 
 import Data.Array (range)
-import Data.Debugged (class Debug, debugged, genericDebug, diff, prettyPrintDelta)
+import Data.Debugged (class Debug, debugged, genericDebug, diffed, prettyPrintDelta)
 import Data.Either (Either(..))
 import Data.Generic.Rep (class Generic)
 import Data.List as L
 import Data.List.Lazy as LL
-import Data.Map (Map)
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import Effect.Console (log)
+import Effect.Exception (throw)
 import PSCI.Support (eval)
+
+superbAssertEqual :: forall a. Eq a => Debug a => a -> a -> Effect Unit
+superbAssertEqual x y =
+  if x == y
+    then pure unit
+    else do
+       log (prettyPrintDelta (diffed x y))
+       throw "Test failed"
 
 data Example a b
   = None
@@ -23,15 +31,16 @@ data Example a b
   | Loads (Array a) (Either a b)
 
 derive instance genericExample :: Generic (Example a b) _
+derive instance eqExample :: (Eq a, Eq b) => Eq (Example a b)
 
 type Eg = Example Int (Array String)
 
 instance debugExample :: (Debug a, Debug b) => Debug (Example a b) where
   debugged = genericDebug
 
+main :: Effect Unit
 main = do
-  let p :: forall a. Debug a => a -> _
-      p x = eval x
+  let p = eval
 
   p 24
   p 1.4e10
@@ -61,12 +70,10 @@ main = do
   p (Loads [1,2,3] (Right ["hi"]))
 
   let
-    x = Loads [1,2,3,4,5] (Right ["hi"]) :: Eg
-    y = Loads [1,2,4,3,5] (Right []) :: Eg
-    z = None :: Eg
+    x = Loads [1,2,3,4,5] (Right ["hi", "world"])
+    y = Loads [1,2,4,3,5] (Right [])
 
-  log (prettyPrintDelta (diff (debugged x) (debugged y)))
-  log (prettyPrintDelta (diff (debugged x) (debugged z)))
+  superbAssertEqual x y
 
 -- note: the type signature is needed here for instance selection
 eg :: forall a. Tuple (a -> a) (Tuple (Either Void (Maybe Unit)) (Either (Either Int Int) Int))
