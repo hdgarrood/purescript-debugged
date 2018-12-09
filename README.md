@@ -176,7 +176,6 @@ Loads
 
 To be done:
 
-- Diff `Debugged` expression trees
 - Provide `uneval :: Debugged -> Maybe String`?
 
 ## License
