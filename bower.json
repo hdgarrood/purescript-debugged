@@ -20,12 +20,9 @@
     "purescript-bifunctors": "^4.0.0",
     "purescript-record": "^1.0.0",
     "purescript-effect": "^2.0.0",
-    "purescript-datetime": "^4.1.0",
-    "purescript-free": "^5.1.0",
-    "purescript-generics-rep": "^6.1.0",
-    "purescript-exceptions": "^4.0.0"
+    "purescript-generics-rep": "^6.1.0"
   },
   "devDependencies": {
-    "purescript-debug": "^4.0.0"
+    "purescript-exceptions": "^4.0.0"
   }
 }
