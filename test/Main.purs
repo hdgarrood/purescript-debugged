@@ -3,7 +3,7 @@ module Test.Main where
 import Prelude
 
 import Data.Array (range)
-import Data.Debugged (class Debug, debugged, genericDebug, diffed, prettyPrintDelta)
+import Data.Debug (class Debug, debug, genericDebug, diffed, prettyPrintDelta)
 import Data.Either (Either(..))
 import Data.Generic.Rep (class Generic)
 import Data.List as L
@@ -36,7 +36,7 @@ derive instance eqExample :: (Eq a, Eq b) => Eq (Example a b)
 type Eg = Example Int (Array String)
 
 instance debugExample :: (Debug a, Debug b) => Debug (Example a b) where
-  debugged = genericDebug
+  debug = genericDebug
 
 main :: Effect Unit
 main = do
@@ -57,7 +57,7 @@ main = do
   p [[1,2,3], [4,5,6], [7,8,9] ]
   p [Tuple "a" 1, Tuple "b" 2]
   p eg
-  p (debugged eg)
+  p (debug eg)
   p {foo: 1, bar: "hi"}
   p {foo: 1, bar: "hi", baz: {quux: 3, aah: Tuple "AAH" "AAAAH"}}
   p (Map.fromFoldable [Tuple "a" 1, Tuple "b" 2])
