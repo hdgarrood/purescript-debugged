@@ -9,8 +9,8 @@ major benefits:
   even allow users to interactively explore large and complex values.
 - Provides the ability to diff expected vs actual structures in tests without
   having to write custom diffing logic for each new data type.
-- Not as convenient as `String`, so there's less temptation to abuse the class
-  for serialization, unlike `Show`.
+- Instead of returning a `String`, the class returns an opaque type, so there's
+  less temptation to abuse the class for e.g. serialization.
 - No expectation that the user should be able to "uneval" the result to produce
   the same value again; by giving the class a smaller and more clearly-defined
   purpose, it should hopefully help us to write uncontroversial instances for
