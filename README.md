@@ -17,9 +17,10 @@ major benefits:
   more types.
 
 The intention (if this experiment turns out to be successful) is that every
-data type of kind `Type` should have a `Debug` instance, so that you never get
-the dreaded NoInstanceFound error when you're just trying to see something in
-the repl.
+data type of kind `Type` should have a `Debug` instance. This makes the repl's
+UX a lot nicer, and is an important step towards banishing the dreaded
+NoInstanceFound errors you often see when you're just trying to play with
+something in the repl.
 
 For more background, see my [Down with Show][] blog series.
 
