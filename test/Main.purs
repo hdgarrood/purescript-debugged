@@ -3,7 +3,7 @@ module Test.Main where
 import Prelude
 
 import Data.Array (range)
-import Data.Debug (class Debug, debug, genericDebug, diff, prettyPrintDelta)
+import Data.Debug (class Debug, debug, genericDebug, diff, prettyPrintDelta, defaultPrettyPrintOptions)
 import Data.Either (Either(..))
 import Data.Generic.Rep (class Generic)
 import Data.List as L
@@ -21,7 +21,7 @@ superbAssertEqual x y =
     then pure unit
     else do
        log "(Pretend) test failed:"
-       log (prettyPrintDelta (diff x y))
+       log (prettyPrintDelta defaultPrettyPrintOptions (diff x y))
 
 data Example a b
   = None
