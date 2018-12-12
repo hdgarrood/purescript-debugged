@@ -1,16 +1,16 @@
 # purescript-debugged
 
 This is an experimental library, which attempts to provide an alternative to
-the `Show` type class with a richer representation. This should hopefully
-provide a few benefits:
+the `Show` type class with a richer representation. This should provide a few
+major benefits:
 
-- Not as convenient as `String`, so there's less temptation to abuse the class
-  for serialization, unlike `Show`.
 - Allows better display in a repl, e.g. we have the option of not attempting to
   display too much of a structure at once. A browser-based repl could possibly
   even allow users to interactively explore large and complex values.
 - Provides the ability to diff expected vs actual structures in tests without
   having to write custom diffing logic for each new data type.
+- Not as convenient as `String`, so there's less temptation to abuse the class
+  for serialization, unlike `Show`.
 - No expectation that the user should be able to "uneval" the result to produce
   the same value again; by giving the class a smaller and more clearly-defined
   purpose, it should hopefully help us to write uncontroversial instances for
@@ -21,6 +21,8 @@ data type of kind `Type` should have a `Debug` instance, so that you never get
 the dreaded NoInstanceFound error when you're just trying to see something in
 the repl.
 
+For more background, see my [Down with Show][] blog series.
+
 Previous discussion:
 
 - https://github.com/purescript/purescript/issues/1675
@@ -28,7 +30,54 @@ Previous discussion:
 
 ## Examples
 
-Input:
+Define a data type:
+
+```purescript
+data MyType a
+  = A Int a
+  | B (a -> Int) (Array Int)
+  | C (Map String a) (Map a String)
+```
+
+Derive some instances:
+
+```purescript
+derive instance genericMyType :: Generic (MyType a) _
+
+instance debugMyType :: Debug a => Debug (MyType a) where
+  debug = genericDebug
+```
+
+Now it's printable in the repl!
+
+```purescript
+> B identity [1,2,3]
+B <function> [ 1, 2, 3 ]
+
+> A 1 (A 2 (A 3 unit))
+A 1 (A 2 (A 3 unit))
+```
+
+Not only that, but we can also diff structures and pretty-print the
+differences:
+
+```purescript
+> items = [Tuple "a" 1, Tuple "b" 2, Tuple "c" 3]
+> x = C (Map.fromFoldable items) (Map.fromFoldable (map swap items))
+> y = C (Map.fromFoldable items) (Map.fromFoldable [Tuple 1 "aa", Tuple 2 "b", Tuple 3 "x"])
+> log $ prettyPrintDelta $ diff x y
+C
+  <Map { "a": 1, "b": 2, "c": 3 }>
+  <Map
+  { 1: -"a" +"aa",
+    2: "b",
+    3: -"c" +"x" }>
+```
+
+and in your terminal, additions and deletions are highlighted green and red
+respectively. Note that all you need for the above is a `Debug` instance!
+
+### Some more pretty-printing examples
 
 ```purescript
 module Test.Main where
@@ -184,3 +233,4 @@ This code is MIT licensed; the `Debug (Record a)` instance is adapted from
 @matthewleon's [purescript-record-show][] library.
 
 [purescript-record-show]: https://github.com/matthewleon/purescript-record-show
+[Down with Show]: https://harry.garrood.me/blog/down-with-show-part-1/
