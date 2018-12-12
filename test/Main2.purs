@@ -2,12 +2,11 @@ module Test.Main2 where
 
 import Prelude
 import Data.Generic.Rep (class Generic)
-import Data.Debug (class Debug, debug, genericDebug, prettyPrint, prettyPrintDelta, diffed)
+import Data.Debug (class Debug, debug, genericDebug, prettyPrint, prettyPrintDelta, diff)
 import Data.Map (Map)
 import Data.Tuple (Tuple(..), swap)
 import Data.Map as Map
 import Effect (Effect)
-import Effect.Exception (throw)
 import Effect.Console (log)
 
 superbAssertEqual :: forall a. Eq a => Debug a => a -> a -> Effect Unit
@@ -16,7 +15,7 @@ superbAssertEqual x y =
     then pure unit
     else do
        log "Test failed:"
-       log (prettyPrintDelta (diffed x y))
+       log (prettyPrintDelta (diff x y))
 
 data MyType a
   = A Int a
@@ -43,7 +42,6 @@ main = do
   p (C (Map.fromFoldable items) (Map.fromFoldable (map swap items)))
 
   let
-    items = [Tuple "a" 3, Tuple "b" 6]
     x = C (Map.fromFoldable items) (Map.fromFoldable (map swap items))
     y = C (Map.fromFoldable items) (Map.fromFoldable (map swap items <> [Tuple 6 "c"]))
 

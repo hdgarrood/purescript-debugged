@@ -3,7 +3,7 @@ module Test.Main where
 import Prelude
 
 import Data.Array (range)
-import Data.Debug (class Debug, debug, genericDebug, diffed, prettyPrintDelta)
+import Data.Debug (class Debug, debug, genericDebug, diff, prettyPrintDelta)
 import Data.Either (Either(..))
 import Data.Generic.Rep (class Generic)
 import Data.List as L
@@ -13,7 +13,6 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import Effect.Console (log)
-import Effect.Exception (throw)
 import PSCI.Support (eval)
 
 superbAssertEqual :: forall a. Eq a => Debug a => a -> a -> Effect Unit
@@ -21,8 +20,8 @@ superbAssertEqual x y =
   if x == y
     then pure unit
     else do
-       log (prettyPrintDelta (diffed x y))
-       throw "Test failed"
+       log "(Pretend) test failed:"
+       log (prettyPrintDelta (diff x y))
 
 data Example a b
   = None
