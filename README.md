@@ -218,12 +218,6 @@ There is [a compiler issue (#3177)](https://github.com/purescript/purescript/iss
 for addressing this, but for now, this package is only usable in projects which
 do not depend on `purescript-psci-support`.
 
-## Status
-
-To be done:
-
-- Provide `uneval :: Debugged -> Maybe String`?
-
 ## License
 
 This code is MIT licensed; the `Debug (Record a)` instance is adapted from
