@@ -2,7 +2,7 @@ module Test.Main2 where
 
 import Prelude
 import Data.Generic.Rep (class Generic)
-import Data.Debug (class Debug, debug, genericDebug, prettyPrint, defaultPrettyPrintOptions, prettyPrintDelta, diff)
+import Data.Debug (class Debug, debug, genericDebug, prettyPrint, prettyPrintDelta, diff)
 import Data.Map (Map)
 import Data.Tuple (Tuple(..), swap)
 import Data.Map as Map
@@ -15,7 +15,7 @@ superbAssertEqual x y =
     then pure unit
     else do
        log "Test failed:"
-       log (prettyPrintDelta defaultPrettyPrintOptions (diff x y))
+       log (prettyPrintDelta (diff x y))
 
 data MyType a
   = A Int a
@@ -32,7 +32,7 @@ main :: Effect Unit
 main = do
   let
     p :: forall a. Debug a => a -> Effect Unit
-    p = log <<< prettyPrint defaultPrettyPrintOptions <<< debug
+    p = log <<< prettyPrint <<< debug
 
   p (A 3 false)
   p (A 3 (A 4 true))
