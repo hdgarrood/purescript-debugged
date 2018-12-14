@@ -59,6 +59,8 @@ main = do
   p (debug eg)
   p {foo: 1, bar: "hi"}
   p {foo: 1, bar: "hi", baz: {quux: 3, aah: Tuple "AAH" "AAAAH"}}
+  p {type: {data: 0}}
+  p {"0": {"1": 2}}
   p (Map.fromFoldable [Tuple "a" 1, Tuple "b" 2])
   p (L.fromFoldable (range 1 10))
   p (LL.fromFoldable (range 1 10))
