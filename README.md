@@ -49,6 +49,14 @@ instance debugMyType :: Debug a => Debug (MyType a) where
   debug = genericDebug
 ```
 
+Tell the repl you would like to use `Debug` instances for pretty-printing:
+
+```
+> :print Data.Debug.Eval.eval
+```
+
+(note that this requires version 0.12.2 of the compiler or later)
+
 Now it's printable in the repl!
 
 ```purescript
@@ -203,20 +211,6 @@ PairA 3 3
 Loads [ 1, 2, 3 ] (Right [ "hi" ])
 ```
 
-## Warning!
-
-This package currently contains a big hack to make it work with the repl. As of
-PureScript v0.12.1, there is no way to configure the function used by the repl
-for printing the results of evaluating expressions. Instead, the repl is
-hardcoded to use the function `eval` from the module `PSCI.Support`. Therefore,
-in order to allow the repl to use `Debug` instances for printing results, we
-need to define our own `PSCI.Support` module.  This is a little problematic,
-because if a package depends on both `purescript-debugged` and
-`purescript-psci-support`, we will see a module name clash.
-
-There is [a compiler issue (#3177)](https://github.com/purescript/purescript/issues/3177)
-for addressing this, but for now, this package is only usable in projects which
-do not depend on `purescript-psci-support`.
 
 ## License
 

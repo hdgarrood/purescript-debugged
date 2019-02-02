@@ -4,6 +4,7 @@ import Prelude
 
 import Data.Array (range)
 import Data.Debug (class Debug, debug, diff, genericDebug, prettyPrintDelta)
+import Data.Debug.Eval (eval)
 import Data.Either (Either(..))
 import Data.Generic.Rep (class Generic)
 import Data.List as L
@@ -13,7 +14,6 @@ import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import Effect.Console (log)
-import PSCI.Support (eval)
 
 superbAssertEqual :: forall a. Eq a => Debug a => a -> a -> Effect Unit
 superbAssertEqual x y =

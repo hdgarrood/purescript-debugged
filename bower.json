@@ -23,6 +23,7 @@
     "purescript-generics-rep": "^6.1.0"
   },
   "devDependencies": {
-    "purescript-exceptions": "^4.0.0"
+    "purescript-exceptions": "^4.0.0",
+    "purescript-psci-support": "^4.0.0"
   }
 }
