@@ -1,0 +1,55 @@
+24
+14000000000.0
+1.4e+30
+0
+'Ĭ'
+-3
+-3.0
+Tuple 1 (-1)
+Tuple 1.0 (-1.0)
+unit
+[ unit ]
+[ [ [ [ unit ] ] ] ]
+[ [ 1, 2, 3 ],
+  [ 4, 5, 6 ],
+  [ 7, 8, 9 ] ]
+[ Tuple "a" 1, Tuple "b" 2 ]
+Tuple <function> (Tuple (Right Nothing) (Left (Left 3)))
+<Repr
+  value: Tuple <function> (Tuple (Right Nothing) (Left (...)))>
+{ bar: "hi", foo: 1 }
+{ bar: "hi",
+  baz: { aah: Tuple "AAH" "AAAAH", quux: 3 },
+  foo: 1 }
+{ type: { data: 0 } }
+{ "0": { "1": 2 } }
+<Map { "a": 1, "b": 2 }>
+<List
+  [ 1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10 ]>
+<List.Lazy
+  [ 1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10 ]>
+None
+PairA 3 3
+Loads [ 1, 2, 3 ] (Right [ "hi" ])
+(Pretend) test failed:
+Loads
+  [ 1, 2, [31m-3[0m [32m+4[0m, [31m-4[0m [32m+3[0m, 5 ]
+  (Right [ [32m+"hi"[0m, [32m+"world"[0m ])
