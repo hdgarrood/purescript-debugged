@@ -74,11 +74,15 @@ main = do
   p (PairA 3 3 :: Eg)
   p (Loads [1,2,3] (Right ["hi"]))
 
-  let
-    x = Loads [1,2,3,4,5] (Right ["hi", "world"])
-    y = Loads [1,2,4,3,5] (Right [])
+  do
+    let x = Loads [1,2,3,4,5] (Right ["hi", "world"])
+        y = Loads [1,2,4,3,5] (Right [])
+    superbAssertEqual x y
 
-  superbAssertEqual x y
+  do
+    let x = Map.fromFoldable [Tuple "a" 1, Tuple "b" 2]
+        y = Map.fromFoldable [Tuple "a" 2, Tuple "c" 3]
+    superbAssertEqual x y
 
 -- note: the type signature is needed here for instance selection
 eg :: forall a. Tuple (a -> a) (Tuple (Either Void (Maybe Unit)) (Either (Either Int Int) Int))
