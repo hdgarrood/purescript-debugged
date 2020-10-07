@@ -1,4 +1,6 @@
 { name = "debugged"
+, license = "MIT"
+, repository = "https://github.com/hdgarrood/purescript-debugged"
 , dependencies =
   [ "arrays"
   , "bifunctors"
