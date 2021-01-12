@@ -22,7 +22,8 @@
     "purescript-effect": "^2.0.0",
     "purescript-generics-rep": "^6.1.0",
     "purescript-datetime": "^4.1.0",
-    "purescript-enums": "^4.0.1"
+    "purescript-enums": "^4.0.1",
+    "purescript-unordered-collections": "^1.10.0"
   },
   "devDependencies": {
     "purescript-exceptions": "^4.0.0",

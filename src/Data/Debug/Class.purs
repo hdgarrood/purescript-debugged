@@ -16,6 +16,10 @@ import Data.Date (Date, day, month, year)
 import Data.Debug.Type as D
 import Data.Either (Either(..))
 import Data.Enum (fromEnum)
+import Data.HashMap (HashMap)
+import Data.HashMap as HashMap
+import Data.HashSet (HashSet)
+import Data.HashSet as HashSet
 import Data.List (List(..), (:))
 import Data.List as List
 import Data.List.Lazy as LazyList
@@ -30,8 +34,8 @@ import Data.Symbol (class IsSymbol, SProxy(..), reflectSymbol)
 import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import Prim.Row as Row
-import Record (get, delete)
 import Prim.RowList (class RowToList, kind RowList, Nil, Cons)
+import Record (get, delete)
 import Type.Data.RowList (RLProxy(..))
 
 -- | Ideally, all types of kind `Type` should have an instance of this class.
@@ -146,6 +150,11 @@ instance debugMap :: (Debug k, Debug v) => Debug (Map k v) where
     D.assoc "Map"
       (map (bimap debug debug) (Map.toUnfoldable m))
 
+instance debugHashMap :: (Debug k, Debug v) => Debug (HashMap k v) where
+  debug m =
+    D.assoc "HashMap"
+      (map (bimap debug debug) (HashMap.toArrayBy Tuple m))
+
 instance debugEffect :: Debug (Effect a) where
   debug _ = D.opaque_ "Effect"
 
@@ -157,6 +166,9 @@ instance debugLazyList :: Debug a => Debug (LazyList.List a) where
 
 instance debugSet :: Debug a => Debug (Set a) where
   debug s = D.collection "Set" (map debug (Set.toUnfoldable s))
+
+instance debugHashSet :: Debug a => Debug (HashSet a) where
+  debug s = D.collection "HashSet" (map debug (HashSet.toUnfoldable s))
 
 instance debugDate :: Debug Date where
   debug d = D.opaqueLiteral "Date"
